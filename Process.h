@@ -1,46 +1,51 @@
-/* Process definition */
-
+/**
+ * Process definition
+ */
 #pragma once
-
 using namespace std;
 
 class Process {
 
-	// A unique identifier for each process
-	int processID;
+	public:
 
-	// All time functions are in milliseconds
+		Process(int procId, int startTime);
 
-	// Time when the process starts in the simulation
-	int startTime;
+		// A unique identifier for each process
+		int procId;
 
-	// Total amount of time spent in CPU burst.
-	// Determined randomly at creation between 1 and 60 seconds
-	int totalCPUDuration;
+		// All time values are in milliseconds
 
-	// The remaining amount of time left for CPU bursts
-	// When it reaches 0, process terminates
-	int remainingCPUDuration;
+		// Time when the process starts in the simulation
+		int startTime;
 
-	// Determined randomly at creation between 5 to 100 ms
-	int averageCPUBurstLength;
+		// Total amount of time spent in CPU burst.
+		// Determined randomly at creation between 1 and 60 seconds
+		int totalCPUDuration;
 
-	// Randomly determined based on averageCPUBurstLegth,
-	// whenever a process is moved into the readyQueue
-	int nextCPUBurstLength;
+		// The remaining amount of time left for CPU bursts
+		// When it reaches 0, process terminates
+		int remainingCPUDuration;
 
-	// Randomly determined whenever a process finishes a CPU burst,
-	// between 30 to 100 ms
-	int IOBurstTime;
+		// Determined randomly at creation between 5 to 100 ms
+		int averageCPUBurstLength;
 
-	// Used by scheduler to determine which process to run next
-	int priority;
+		// Randomly determined based on averageCPUBurstLegth,
+		// whenever a process is moved into the readyQueue
+		int nextCPUBurstLength;
 
-	// The state the process is currently in
-	enum Status {
-		ready,
-		running,
-		waiting,
-		terminated
-	};
-}
+		// Randomly determined whenever a process finishes a CPU burst,
+		// between 30 to 100 ms
+		int IOBurstTime;
+
+		// Used by scheduler to determine which process to run next
+		int priority;
+
+		// The state the process is currently in
+		enum Status {
+			READY,
+			RUNNING,
+			WAITING,
+			TERMINATED
+		};
+
+};
