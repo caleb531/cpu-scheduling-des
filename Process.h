@@ -47,5 +47,6 @@ class Process {
 			WAITING,
 			TERMINATED
 		};
+		Status status;
 
 };
