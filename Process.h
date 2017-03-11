@@ -49,4 +49,10 @@ class Process {
 		};
 		Status status;
 
+		// Overload comparison operators so Process instances can be placed in a
+		// priority queue
+		friend bool operator <(const Process &a, const Process &b);
+		friend bool operator >(const Process &a, const Process &b);
+		friend bool operator ==(const Process &a, const Process &b);
+
 };

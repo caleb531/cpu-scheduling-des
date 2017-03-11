@@ -10,3 +10,13 @@ Event::Event(EventType eventType, int eventTime, int procId) {
 	this->eventTime = eventTime;
 	this->procId = procId;
 }
+
+bool operator <(const Event &a, const Event &b) {
+	return a.eventTime < b.eventTime;
+}
+bool operator >(const Event &a, const Event &b) {
+	return a.eventTime > b.eventTime;
+}
+bool operator ==(const Event &a, const Event &b) {
+	return a.eventTime == b.eventTime;
+}

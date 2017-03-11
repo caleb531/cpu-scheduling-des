@@ -13,3 +13,13 @@ Process::Process(int procId, int startTime) {
 
 	this->remainingCPUDuration = totalCPUDuration;
 }
+
+bool operator <(const Process &a, const Process &b) {
+	return a.totalCPUDuration < b.totalCPUDuration;
+}
+bool operator >(const Process &a, const Process &b) {
+	return a.totalCPUDuration > b.totalCPUDuration;
+}
+bool operator ==(const Process &a, const Process &b) {
+	return a.totalCPUDuration == b.totalCPUDuration;
+}
