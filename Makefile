@@ -2,7 +2,7 @@
 
 CC = g++
 SRC = *.cpp
-PROG = cpu-scheduling-des.out
+PROG = des.out
 
 # Clean project and compile program
 build: clean $(PROG)
