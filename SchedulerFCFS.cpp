@@ -25,9 +25,9 @@ void SchedulerFCFS::handleIOCompletion(Event *event) {
 	// TODO: handle I/O completion event
 	schedule();
 }
-void SchedulerFCFS::handleEvent(Event *event) {
+/*void SchedulerFCFS::handleEvent(Event *event) {
 	// TODO: handle any type of event
-}
+}*/
 
 void SchedulerFCFS::schedule() {
 	// TODO: implement FCFS scheduling

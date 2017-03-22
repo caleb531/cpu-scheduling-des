@@ -20,7 +20,7 @@ class SchedulerFCFS : public Scheduler {
 		void handleProcArrival(Event *event);
 		void handleCPUCompletion(Event *event);
 		void handleIOCompletion(Event *event);
-		void handleEvent(Event *event);
+		//void handleEvent(Event *event);
 		void schedule();
 
 };

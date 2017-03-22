@@ -25,9 +25,9 @@ void SchedulerSJF::handleIOCompletion(Event *event) {
 	// TODO: handle I/O completion event
 	schedule();
 }
-void SchedulerSJF::handleEvent(Event *event) {
+/*void SchedulerSJF::handleEvent(Event *event) {
 	// TODO: handle any type of event
-}
+}*/
 
 void SchedulerSJF::schedule() {
 	// TODO: implement SJF scheduling

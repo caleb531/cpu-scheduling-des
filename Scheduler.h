@@ -29,7 +29,7 @@ class Scheduler {
 		virtual void handleProcArrival(Event *event) = 0;
 		virtual void handleCPUCompletion(Event *event) = 0;
 		virtual void handleIOCompletion(Event *event) = 0;
-		virtual void handleEvent(Event *event) = 0;
+		virtual void handleEvent(Event *event);
 
 		// The core scheduling algorithm that determines which processes get
 		// time on the CPU; this must be defined by each subclass
