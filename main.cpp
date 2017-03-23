@@ -21,24 +21,15 @@ int main() {
 	priority_queue<Event> *eventQueue = new priority_queue<Event>();
 
 
-	//Fill the event queue for testing purposes
+	//Filling the event queue for testing purposes
 	for(int i = 0; i < 10; i++){
 		Event e(Event::PROCESS_ARRIVAL, 0, procID);
 		procID++;
-		//cout << "Creating process arrival event" << endl;
-		//cout << "pointer: " << e << endl;
 		eventQueue->push(e);
 	}
 	
 	SchedulerFCFS scheduler(eventQueue);
 
-	/*for(int i = 0; i < eventQueue->size(); i++){
-		Event *eve = eventQueue->top();
-		eventQueue->pop();
-
-		cout << "Event poped: " << eve << endl;
-	}*/
-	
 	//Main while loop
 	while(!eventQueue->empty() && currentTime < quitTime){
 		cout << "Start of main while" << endl;

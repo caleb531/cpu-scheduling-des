@@ -18,8 +18,6 @@ SchedulerFCFS::SchedulerFCFS(priority_queue<Event> *eventQueue) : Scheduler(even
 }
 
 void SchedulerFCFS::handleProcArrival(Event *event) {
-	cout << "Handling proc arrival" << endl;
-	cout << "CURRENT TIME: " << event->eventTime << endl;
 	int procID = event->procId;
 
 	// Create a process and put in in the process table
@@ -35,8 +33,6 @@ void SchedulerFCFS::handleProcArrival(Event *event) {
 }
 
 void SchedulerFCFS::handleCPUCompletion(Event *event) {
-	cout << "Handling CPU completion" << endl;
-	cout << "CURRENT TIME: " << event->eventTime << endl;
 	// Find the process that the event is talking about
 	int procID = event->procId;
 	Process *proc = findProcess(procID);
@@ -59,7 +55,6 @@ void SchedulerFCFS::handleCPUCompletion(Event *event) {
 	schedule(event->eventTime);
 }
 void SchedulerFCFS::handleIOCompletion(Event *event) {
-	cout << "Handling io completion" << endl;
 	// Find the process that the event is talking about
 	int procID = event->procId;
 	Process *proc = findProcess(procID);
@@ -73,8 +68,6 @@ void SchedulerFCFS::handleIOCompletion(Event *event) {
 }
 
 void SchedulerFCFS::schedule(int currentTime) {
-	cout << "scheduling" << endl;
-	cout << "CURRENT TIME: " << currentTime << endl;
 	if(isCPUIdle && !readyQueue.empty()){
 		// If the CPU is idle, grab the next process from readyQueue and set it to run
 		Process *proc = readyQueue.front();
