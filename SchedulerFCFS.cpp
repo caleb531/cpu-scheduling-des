@@ -11,7 +11,7 @@
 using namespace std;
 
 
-SchedulerFCFS::SchedulerFCFS(priority_queue<Event> *eventQueue) : Scheduler<queue<Process*>>(eventQueue) {
+SchedulerFCFS::SchedulerFCFS(priority_queue<Event> *eventQueue) : Scheduler< queue<Process*> >(eventQueue) {
 	// Do nothing; the initializer list takes care of everything
 }
 

@@ -11,8 +11,8 @@
 #include "random.h"
 using namespace std;
 
-template class Scheduler<queue<Process*>>;
-template class Scheduler<priority_queue<Process*>>;
+template class Scheduler< queue<Process*> >;
+template class Scheduler< priority_queue<Process*> >;
 
 template <typename ReadyQueue>
 Scheduler<ReadyQueue>::Scheduler(priority_queue<Event> *eventQueue) {

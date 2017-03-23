@@ -8,7 +8,7 @@
 #include "Scheduler.h"
 using namespace std;
 
-class SchedulerSJF : public Scheduler<priority_queue<Process*>> {
+class SchedulerSJF : public Scheduler< priority_queue<Process*> > {
 
 	public:
 

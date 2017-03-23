@@ -9,7 +9,7 @@
 using namespace std;
 
 
-SchedulerSJF::SchedulerSJF(priority_queue<Event> *eventQueue) : Scheduler<priority_queue<Process*>>(eventQueue) {
+SchedulerSJF::SchedulerSJF(priority_queue<Event> *eventQueue) : Scheduler< priority_queue<Process*> >(eventQueue) {
 	// Do nothing; the initializer list takes care of everything
 }
 
