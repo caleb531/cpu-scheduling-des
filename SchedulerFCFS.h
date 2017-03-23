@@ -15,12 +15,12 @@ class SchedulerFCFS : public Scheduler {
 		// The queue containing processes in the READY state
 		queue<Process*> readyQueue;
 
-		SchedulerFCFS(priority_queue<Event*> *eventQueue);
+		SchedulerFCFS(priority_queue<Event> *eventQueue);
 
 		void handleProcArrival(Event *event);
 		void handleCPUCompletion(Event *event);
 		void handleIOCompletion(Event *event);
 		//void handleEvent(Event *event);
-		void schedule();
+		void schedule(int currentTime);
 
 };
