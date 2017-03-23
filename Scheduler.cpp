@@ -4,7 +4,6 @@
 #include <cstddef>
 #include <cstdlib>
 #include <ctime>
-#include <deque>
 #include <queue>
 #include "Process.h"
 #include "Event.h"
@@ -12,11 +11,11 @@
 #include "random.h"
 using namespace std;
 
-template class Scheduler< queue<Process*> >;
-template class Scheduler< priority_queue< Process*, deque<Process*>, ProcessComparator > >;
+template class Scheduler<ProcessQueue>;
+template class Scheduler<ProcessPriorityQueue>;
 
 template <typename ReadyQueue>
-Scheduler<ReadyQueue>::Scheduler(priority_queue< Event*, deque<Event*>, EventComparator > *eventQueue) {
+Scheduler<ReadyQueue>::Scheduler(EventPriorityQueue *eventQueue) {
 	this->eventQueue = eventQueue;
 	this->isCPUIdle = true;
 }

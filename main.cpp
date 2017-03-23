@@ -1,5 +1,4 @@
 #include <iostream>
-#include <deque>
 #include <queue>
 #include <vector>
 #include "Event.h"
@@ -19,7 +18,7 @@ int main() {
 	int procID = 0;
 
 
-	priority_queue< Event*, deque<Event*>, EventComparator > *eventQueue = new priority_queue< Event*, deque<Event*>, EventComparator >();
+	EventPriorityQueue *eventQueue = new EventPriorityQueue();
 
 
 	//Filling the event queue for testing purposes

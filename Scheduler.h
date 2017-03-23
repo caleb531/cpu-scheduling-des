@@ -8,6 +8,11 @@
 #include "Event.h"
 using namespace std;
 
+// Define handy aliases to complex queue types used throughout program
+typedef queue<Process*> ProcessQueue;
+typedef priority_queue< Process*, deque<Process*>, ProcessComparator > ProcessPriorityQueue;
+typedef priority_queue< Event*, deque<Event*>, EventComparator > EventPriorityQueue;
+
 // The Scheduler class should not be instantiated itself; it should instead be
 // subclassed, with the following virtual methods implemented
 template <typename ReadyQueue>
@@ -19,7 +24,7 @@ class Scheduler {
 		vector<Process*> procTable;
 		// A reference to the process event queue; this is supplied when the
 		// scheduler is instantiated
-		priority_queue< Event*, deque<Event*>, EventComparator > *eventQueue;
+		EventPriorityQueue *eventQueue;
 		// The queue containing processes in the READY state; each subclass
 		// defines the particular type of queue
 		ReadyQueue readyQueue;
@@ -29,7 +34,7 @@ class Scheduler {
 
 	public:
 
-		Scheduler(priority_queue< Event*, deque<Event*>, EventComparator > *eventQueue);
+		Scheduler(EventPriorityQueue *eventQueue);
 
 		// Add the given process to the queue
 

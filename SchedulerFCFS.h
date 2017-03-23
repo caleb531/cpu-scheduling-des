@@ -2,18 +2,17 @@
  * First-Come-First-Serve (FCFS) scheduler definition
  */
 #pragma once
-#include <deque>
 #include <queue>
 #include "Process.h"
 #include "Event.h"
 #include "Scheduler.h"
 using namespace std;
 
-class SchedulerFCFS : public Scheduler< queue<Process*> > {
+class SchedulerFCFS : public Scheduler<ProcessQueue> {
 
 	public:
 
-		SchedulerFCFS(priority_queue< Event*, deque<Event*>, EventComparator > *eventQueue);
+		SchedulerFCFS(EventPriorityQueue *eventQueue);
 		void schedule(int currentTime);
 
 };

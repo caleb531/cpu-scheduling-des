@@ -1,7 +1,6 @@
 /**
  * Shortest-Job-First (SJF) scheduler implementation
  */
-#include <deque>
 #include <queue>
 #include "Process.h"
 #include "Event.h"
@@ -10,7 +9,7 @@
 using namespace std;
 
 
-SchedulerSJF::SchedulerSJF(priority_queue< Event*, deque<Event*>, EventComparator > *eventQueue) : Scheduler< priority_queue< Process*, deque<Process*>, ProcessComparator > >(eventQueue) {
+SchedulerSJF::SchedulerSJF(EventPriorityQueue *eventQueue) : Scheduler<ProcessPriorityQueue>(eventQueue) {
 	// Do nothing; the initializer list takes care of everything
 }
 
