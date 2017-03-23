@@ -11,12 +11,8 @@ Event::Event(EventType eventType, int eventTime, int procId) {
 	this->procId = procId;
 }
 
-bool operator <(const Event &a, const Event &b) {
-	return a.eventTime < b.eventTime;
-}
-bool operator >(const Event &a, const Event &b) {
-	return a.eventTime > b.eventTime;
-}
-bool operator ==(const Event &a, const Event &b) {
-	return a.eventTime == b.eventTime;
+bool EventComparator::operator ()(Event *a, Event *b) {
+	// The STL priority_queue considers the greatest numeric value to be the
+	// highest priority, but we want the other way around
+	return a->eventTime > b->eventTime;
 }

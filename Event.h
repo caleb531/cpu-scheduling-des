@@ -23,10 +23,14 @@ class Event {
 
 		Event(EventType eventType, int eventTime, int procId);
 
-		// Overload comparison operators so Event instances can be placed in a
-		// priority queue
-		friend bool operator <(const Event &a, const Event &b);
-		friend bool operator >(const Event &a, const Event &b);
-		friend bool operator ==(const Event &a, const Event &b);
+};
+
+// Define a custom comparator so that Event pointers can be compared in priority
+// queues
+class EventComparator {
+
+	public:
+
+		bool operator ()(Event* a, Event* b);
 
 };

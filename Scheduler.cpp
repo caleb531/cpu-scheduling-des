@@ -4,6 +4,7 @@
 #include <cstddef>
 #include <cstdlib>
 #include <ctime>
+#include <deque>
 #include <queue>
 #include "Process.h"
 #include "Event.h"
@@ -12,10 +13,10 @@
 using namespace std;
 
 template class Scheduler< queue<Process*> >;
-template class Scheduler< priority_queue<Process*> >;
+template class Scheduler< priority_queue< Process*, deque<Process*>, ProcessComparator > >;
 
 template <typename ReadyQueue>
-Scheduler<ReadyQueue>::Scheduler(priority_queue<Event> *eventQueue) {
+Scheduler<ReadyQueue>::Scheduler(priority_queue< Event*, deque<Event*>, EventComparator > *eventQueue) {
 	this->eventQueue = eventQueue;
 	this->isCPUIdle = true;
 }
@@ -64,7 +65,7 @@ void Scheduler<ReadyQueue>::handleCPUCompletion(Event *event) {
 		proc->IOBurstTime = ioTime;
 
 		Event *newEvent = new Event(Event::IO_COMPLETION, event->eventTime + proc->IOBurstTime, proc->procId);
-		eventQueue->push(*newEvent);
+		eventQueue->push(newEvent);
 	}
 
 	isCPUIdle = true;

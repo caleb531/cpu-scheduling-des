@@ -1,4 +1,5 @@
 #include <iostream>
+#include <deque>
 #include <queue>
 #include <vector>
 #include "Event.h"
@@ -18,12 +19,12 @@ int main() {
 	int procID = 0;
 
 
-	priority_queue<Event> *eventQueue = new priority_queue<Event>();
+	priority_queue< Event*, deque<Event*>, EventComparator > *eventQueue = new priority_queue< Event*, deque<Event*>, EventComparator >();
 
 
 	//Filling the event queue for testing purposes
 	for(int i = 0; i < 10; i++){
-		Event e(Event::PROCESS_ARRIVAL, 0, procID);
+		Event* e = new Event(Event::PROCESS_ARRIVAL, 0, procID);
 		procID++;
 		eventQueue->push(e);
 	}
@@ -32,12 +33,11 @@ int main() {
 
 	//Main while loop
 	while(!eventQueue->empty() && currentTime < quitTime){
-		Event nextEvent = eventQueue->top();
+		Event* nextEvent = eventQueue->top();
 		eventQueue->pop();
-		Event *ev = &nextEvent;
 
-		currentTime = ev->eventTime;
-		scheduler.handleEvent(ev);
+		currentTime = nextEvent->eventTime;
+		scheduler.handleEvent(nextEvent);
 	}
 	return 0;
 }

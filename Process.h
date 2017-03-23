@@ -49,10 +49,15 @@ class Process {
 		};
 		Status status;
 
-		// Overload comparison operators so Process instances can be placed in a
-		// priority queue
-		friend bool operator <(const Process &a, const Process &b);
-		friend bool operator >(const Process &a, const Process &b);
-		friend bool operator ==(const Process &a, const Process &b);
+};
+
+
+// Define a custom comparator so that Process pointers can be compared in
+// priority queues
+class ProcessComparator {
+
+	public:
+
+		bool operator ()(Process* a, Process* b);
 
 };

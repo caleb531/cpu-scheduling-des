@@ -2,6 +2,7 @@
  * Scheduler abstract base class definition
  */
 #pragma once
+#include <deque>
 #include <queue>
 #include "Process.h"
 #include "Event.h"
@@ -18,7 +19,7 @@ class Scheduler {
 		vector<Process*> procTable;
 		// A reference to the process event queue; this is supplied when the
 		// scheduler is instantiated
-		priority_queue<Event> *eventQueue;
+		priority_queue< Event*, deque<Event*>, EventComparator > *eventQueue;
 		// The queue containing processes in the READY state; each subclass
 		// defines the particular type of queue
 		ReadyQueue readyQueue;
@@ -28,7 +29,7 @@ class Scheduler {
 
 	public:
 
-		Scheduler(priority_queue<Event> *eventQueue);
+		Scheduler(priority_queue< Event*, deque<Event*>, EventComparator > *eventQueue);
 
 		// Add the given process to the queue
 

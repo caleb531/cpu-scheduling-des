@@ -1,6 +1,7 @@
 /**
  * First-Come-First-Serve (FCFS) scheduler implementation
  */
+#include <deque>
 #include <queue>
 #include <cstdlib>
 #include <iostream>
@@ -11,7 +12,7 @@
 using namespace std;
 
 
-SchedulerFCFS::SchedulerFCFS(priority_queue<Event> *eventQueue) : Scheduler< queue<Process*> >(eventQueue) {
+SchedulerFCFS::SchedulerFCFS(priority_queue< Event*, deque<Event*>, EventComparator > *eventQueue) : Scheduler< queue<Process*> >(eventQueue) {
 	// Do nothing; the initializer list takes care of everything
 }
 
@@ -23,6 +24,6 @@ void SchedulerFCFS::schedule(int currentTime) {
 		proc->status = Process::RUNNING;
 
 		Event *newEvent = new Event(Event::CPU_COMPLETION, currentTime + proc->nextCPUBurstLength, proc->procId);
-		eventQueue->push(*newEvent);
+		eventQueue->push(newEvent);
 	}
 }
