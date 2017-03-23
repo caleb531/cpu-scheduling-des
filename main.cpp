@@ -32,7 +32,6 @@ int main() {
 
 	//Main while loop
 	while(!eventQueue->empty() && currentTime < quitTime){
-		cout << "Start of main while" << endl;
 		Event nextEvent = eventQueue->top();
 		eventQueue->pop();
 		Event *ev = &nextEvent;
@@ -40,7 +39,5 @@ int main() {
 		currentTime = ev->eventTime;
 		scheduler.handleEvent(ev);
 	}
-
-	cout << "DONE!" << endl;
 	return 0;
 }
