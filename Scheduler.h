@@ -9,6 +9,7 @@ using namespace std;
 
 // The Scheduler class should not be instantiated itself; it should instead be
 // subclassed, with the following virtual methods implemented
+template <typename ReadyQueue>
 class Scheduler {
 
 	protected:
@@ -18,6 +19,9 @@ class Scheduler {
 		// A reference to the process event queue; this is supplied when the
 		// scheduler is instantiated
 		priority_queue<Event> *eventQueue;
+		// The queue containing processes in the READY state; each subclass
+		// defines the particular type of queue
+		ReadyQueue readyQueue;
 
 		// Flag to note whether the CPU is being used or not
 		bool isCPUIdle;
@@ -29,10 +33,10 @@ class Scheduler {
 		// Add the given process to the queue
 
 		// Handle various kinds of process events
-		virtual void handleProcArrival(Event *event) = 0;
-		virtual void handleCPUCompletion(Event *event) = 0;
-		virtual void handleIOCompletion(Event *event) = 0;
-		virtual void handleEvent(Event *event);
+		void handleProcArrival(Event *event);
+		void handleCPUCompletion(Event *event);
+		void handleIOCompletion(Event *event);
+		void handleEvent(Event *event);
 
 		// The core scheduling algorithm that determines which processes get
 		// time on the CPU; this must be defined by each subclass

@@ -17,7 +17,7 @@ int main() {
 	int currentTime = 0;
 	int procID = 0;
 
-	
+
 	priority_queue<Event> *eventQueue = new priority_queue<Event>();
 
 
@@ -27,7 +27,7 @@ int main() {
 		procID++;
 		eventQueue->push(e);
 	}
-	
+
 	SchedulerFCFS scheduler(eventQueue);
 
 	//Main while loop

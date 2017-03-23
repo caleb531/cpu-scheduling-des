@@ -8,19 +8,11 @@
 #include "Scheduler.h"
 using namespace std;
 
-class SchedulerFCFS : public Scheduler {
+class SchedulerFCFS : public Scheduler<queue<Process*>> {
 
 	public:
 
-		// The queue containing processes in the READY state
-		queue<Process*> readyQueue;
-
 		SchedulerFCFS(priority_queue<Event> *eventQueue);
-
-		void handleProcArrival(Event *event);
-		void handleCPUCompletion(Event *event);
-		void handleIOCompletion(Event *event);
-		//void handleEvent(Event *event);
 		void schedule(int currentTime);
 
 };
