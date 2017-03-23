@@ -6,6 +6,7 @@
 #include "Event.h"
 #include "Scheduler.h"
 #include "SchedulerFCFS.h"
+#include "random.h"
 using namespace std;
 
 
@@ -14,7 +15,14 @@ SchedulerFCFS::SchedulerFCFS(priority_queue<Event*> *eventQueue) : Scheduler(eve
 }
 
 void SchedulerFCFS::handleProcArrival(Event *event) {
-	// TODO: handle process arrival event
+	int procID = event->procId;
+
+	Process *proc = new Process(procID, event->eventTime);
+	procTable.push_back(proc);
+
+	proc->nextCPUBurstLength = CPUBurstRandom(proc->averageCPUBurstLength);
+	readyQueue.push(proc);
+
 	schedule();
 }
 void SchedulerFCFS::handleCPUCompletion(Event *event) {
@@ -30,5 +38,14 @@ void SchedulerFCFS::handleIOCompletion(Event *event) {
 }*/
 
 void SchedulerFCFS::schedule() {
-	// TODO: implement FCFS scheduling
+	if(isCPUIdle){
+		Process *proc = readyQueue.front();
+		readyQueue.pop();
+		proc->status = Process::RUNNING;
+
+		//TODO: Check time for event to finish
+		Event *newEvent = new Event(Event::CPU_COMPLETION, proc->nextCPUBurstLength, proc->procId);
+		
+		eventQueue->push(newEvent);
+	}
 }

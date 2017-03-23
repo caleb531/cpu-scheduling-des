@@ -14,10 +14,13 @@ class Scheduler {
 	protected:
 
 		// The list of all processes in the system
-		vector<Process> procTable;
+		vector<Process*> procTable;
 		// A reference to the process event queue; this is supplied when the
 		// scheduler is instantiated
 		priority_queue<Event*> *eventQueue;
+
+		// Flag to note whether the CPU is being used or not
+		bool isCPUIdle;
 
 	public:
 
