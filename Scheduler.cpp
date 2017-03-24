@@ -54,7 +54,7 @@ void Scheduler<ReadyQueue>::handleCPUCompletion(Event *event) {
 	Process *proc = findProcess(procID);
 
 	// If the process is done with its CPU bursts, terminate it
-	if (proc->remainingCPUDuration = 0) {
+	if (proc->remainingCPUDuration == 0) {
 		proc->status = Process::TERMINATED;
 	}
 	else {
