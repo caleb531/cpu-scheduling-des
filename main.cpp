@@ -22,7 +22,7 @@ int main() {
 
 
 	//Filling the event queue for testing purposes
-	for(int i = 0; i < 10; i++){
+	for (int i = 0; i < 10; i++) {
 		Event* e = new Event(Event::PROCESS_ARRIVAL, 0, procID);
 		procID++;
 		eventQueue->push(e);
@@ -31,7 +31,7 @@ int main() {
 	SchedulerFCFS scheduler(eventQueue);
 
 	//Main while loop
-	while(!eventQueue->empty() && currentTime < quitTime){
+	while (!eventQueue->empty() && currentTime < quitTime) {
 		Event* nextEvent = eventQueue->top();
 		eventQueue->pop();
 

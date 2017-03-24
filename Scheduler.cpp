@@ -21,9 +21,9 @@ Scheduler<ReadyQueue>::Scheduler(EventPriorityQueue *eventQueue) {
 }
 
 template <typename ReadyQueue>
-Process* Scheduler<ReadyQueue>::findProcess(int procID){
-	for(int i = 0; i < procTable.size(); i++){
-		if(procTable[i]->procId == procID){
+Process* Scheduler<ReadyQueue>::findProcess(int procID) {
+	for (int i = 0; i < procTable.size(); i++) {
+		if (procTable[i]->procId == procID) {
 			return procTable[i];
 		}
 	}
@@ -54,7 +54,7 @@ void Scheduler<ReadyQueue>::handleCPUCompletion(Event *event) {
 	Process *proc = findProcess(procID);
 
 	// If the process is done with its CPU bursts, terminate it
-	if (proc->remainingCPUDuration = 0){
+	if (proc->remainingCPUDuration = 0) {
 		proc->status = Process::TERMINATED;
 	}
 	else {
@@ -86,8 +86,8 @@ void Scheduler<ReadyQueue>::handleIOCompletion(Event *event) {
 }
 
 template <typename ReadyQueue>
-void Scheduler<ReadyQueue>::handleEvent(Event *e){
-	switch(e->eventType){
+void Scheduler<ReadyQueue>::handleEvent(Event *e) {
+	switch (e->eventType) {
 		case Event::PROCESS_ARRIVAL:
 			handleProcArrival(e);
 			break;
