@@ -36,13 +36,13 @@ void Scheduler<ReadyQueue>::handleProcArrival(Event *event) {
 	int procID = event->procId;
 
 	// Create a process and put in in the process table
-	Process *proc = new Process(procID, event->eventTime);
-	procTable.push_back(proc);
+	Process *newProc = new Process(procID, event->eventTime);
+	procTable.push_back(newProc);
 
 	// Determine its next CPU burst length and put it into the readyQueue
-	proc->nextCPUBurstLength = CPUBurstRandom(proc->averageCPUBurstLength);
-	proc->status = Process::WAITING;
-	readyQueue.push(proc);
+	newProc->nextCPUBurstLength = CPUBurstRandom(newProc->averageCPUBurstLength);
+	newProc->status = Process::WAITING;
+	readyQueue.push(newProc);
 
 	schedule(event->eventTime);
 }
@@ -50,20 +50,19 @@ void Scheduler<ReadyQueue>::handleProcArrival(Event *event) {
 template <typename ReadyQueue>
 void Scheduler<ReadyQueue>::handleCPUCompletion(Event *event) {
 	// Find the process that the event is talking about
-	int procID = event->procId;
-	Process *proc = findProcess(procID);
+	Process *eventProc = findProcess(event->procId);
 
 	// If the process is done with its CPU bursts, terminate it
-	if (proc->remainingCPUDuration == 0) {
-		proc->status = Process::TERMINATED;
+	if (eventProc->remainingCPUDuration == 0) {
+		eventProc->status = Process::TERMINATED;
 	}
 	else {
 		// Else determine a random IO burst time and create an io completion event
 		srand(time(NULL));
 		int ioTime = rand() % 71 + 30;
-		proc->IOBurstTime = ioTime;
+		eventProc->IOBurstTime = ioTime;
 
-		Event *newEvent = new Event(Event::IO_COMPLETION, event->eventTime + proc->IOBurstTime, proc->procId);
+		Event *newEvent = new Event(Event::IO_COMPLETION, event->eventTime + eventProc->IOBurstTime, eventProc->procId);
 		eventQueue->push(newEvent);
 	}
 
@@ -74,28 +73,27 @@ void Scheduler<ReadyQueue>::handleCPUCompletion(Event *event) {
 template <typename ReadyQueue>
 void Scheduler<ReadyQueue>::handleIOCompletion(Event *event) {
 	// Find the process that the event is talking about
-	int procID = event->procId;
-	Process *proc = findProcess(procID);
+	Process *eventProc = findProcess(event->procId);
 
 	// Determine its next CPU burst length and put it into the readyQueue
-	proc->nextCPUBurstLength = CPUBurstRandom(proc->averageCPUBurstLength);
-	proc->status = Process::WAITING;
-	readyQueue.push(proc);
+	eventProc->nextCPUBurstLength = CPUBurstRandom(eventProc->averageCPUBurstLength);
+	eventProc->status = Process::WAITING;
+	readyQueue.push(eventProc);
 
 	schedule(event->eventTime);
 }
 
 template <typename ReadyQueue>
-void Scheduler<ReadyQueue>::handleEvent(Event *e) {
-	switch (e->eventType) {
+void Scheduler<ReadyQueue>::handleEvent(Event *event) {
+	switch (event->eventType) {
 		case Event::PROCESS_ARRIVAL:
-			handleProcArrival(e);
+			handleProcArrival(event);
 			break;
 		case Event::CPU_COMPLETION:
-			handleCPUCompletion(e);
+			handleCPUCompletion(event);
 			break;
 		case Event::IO_COMPLETION:
-			handleIOCompletion(e);
+			handleIOCompletion(event);
 			break;
 	}
 }

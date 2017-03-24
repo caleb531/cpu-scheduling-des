@@ -18,11 +18,11 @@ SchedulerFCFS::SchedulerFCFS(EventPriorityQueue *eventQueue) : Scheduler<Process
 void SchedulerFCFS::schedule(int currentTime) {
 	if (isCPUIdle && !readyQueue.empty()) {
 		// If the CPU is idle, grab the next process from readyQueue and set it to run
-		Process *proc = readyQueue.front();
+		Process *runningProc = readyQueue.front();
 		readyQueue.pop();
-		proc->status = Process::RUNNING;
+		runningProc->status = Process::RUNNING;
 
-		Event *newEvent = new Event(Event::CPU_COMPLETION, currentTime + proc->nextCPUBurstLength, proc->procId);
+		Event *newEvent = new Event(Event::CPU_COMPLETION, currentTime + runningProc->nextCPUBurstLength, runningProc->procId);
 		eventQueue->push(newEvent);
 	}
 }

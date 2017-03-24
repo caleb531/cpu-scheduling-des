@@ -23,9 +23,9 @@ int main() {
 
 	//Filling the event queue for testing purposes
 	for (int i = 0; i < 10; i++) {
-		Event* e = new Event(Event::PROCESS_ARRIVAL, 0, procID);
+		Event* arrivalEvent = new Event(Event::PROCESS_ARRIVAL, 0, procID);
 		procID++;
-		eventQueue->push(e);
+		eventQueue->push(arrivalEvent);
 	}
 
 	SchedulerFCFS scheduler(eventQueue);
