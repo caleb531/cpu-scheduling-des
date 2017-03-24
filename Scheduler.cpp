@@ -1,5 +1,5 @@
 /**
- * Scheduler abstract base typename implementation
+ * Scheduler abstract base class implementation
  */
 #include <cstddef>
 #include <cstdlib>
