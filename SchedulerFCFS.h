@@ -3,8 +3,6 @@
  */
 #pragma once
 #include <queue>
-#include "Process.h"
-#include "Event.h"
 #include "Scheduler.h"
 using namespace std;
 
