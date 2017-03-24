@@ -1,6 +1,5 @@
 #include <iostream>
 #include <queue>
-#include <vector>
 #include "Event.h"
 #include "Scheduler.h"
 #include "SchedulerFCFS.h"
