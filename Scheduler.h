@@ -10,8 +10,8 @@ using namespace std;
 
 // Define handy aliases to complex queue types used throughout program
 typedef queue<Process*> ProcessQueue;
-typedef priority_queue< Process*, deque<Process*>, ProcessComparator > ProcessPriorityQueue;
-typedef priority_queue< Event*, deque<Event*>, EventComparator > EventPriorityQueue;
+typedef priority_queue<Process*, deque<Process*>, ProcessComparator> ProcessPriorityQueue;
+typedef priority_queue<Event*, deque<Event*>, EventComparator> EventPriorityQueue;
 
 // The Scheduler class should not be instantiated itself; it should instead be
 // subclassed, with the following virtual methods implemented
