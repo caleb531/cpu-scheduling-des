@@ -14,7 +14,6 @@ int main() {
 
 	int quitTime = 300000;
 	int currentTime = 0;
-	int procID = 0;
 
 
 	EventPriorityQueue *eventQueue = new EventPriorityQueue();
@@ -22,8 +21,7 @@ int main() {
 
 	//Filling the event queue for testing purposes
 	for (int i = 0; i < 10; i++) {
-		Event* arrivalEvent = new Event(Event::PROCESS_ARRIVAL, 0, procID);
-		procID++;
+		Event* arrivalEvent = new Event(Event::PROCESS_ARRIVAL, 0, i);
 		eventQueue->push(arrivalEvent);
 	}
 
