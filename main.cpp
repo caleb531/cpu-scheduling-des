@@ -12,7 +12,7 @@ int main() {
 	cout << "Caleb Evans" << endl;
 	cout << "Jonathan Tapia" << endl;
 
-	int quitTime = 300000;
+	const int quitTime = 300000;
 	int currentTime = 0;
 
 
