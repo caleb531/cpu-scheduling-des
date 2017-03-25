@@ -36,6 +36,9 @@ class Process {
 		// whenever a process is moved into the readyQueue
 		int nextCPUBurstLength;
 
+		// Total amount of time process spends in I/O
+		int totalIODuration;
+
 		// Randomly determined whenever a process finishes a CPU burst,
 		// between 30 to 100 ms
 		int IOBurstTime;

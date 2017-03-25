@@ -86,6 +86,7 @@ void Scheduler<ReadyQueue>::handleIOCompletion(Event *ioEvent) {
 	// Find the process that the event is talking about
 	Process *eventProc = findProcess(ioEvent->procId);
 
+	eventProc->totalIODuration += eventProc->IOBurstTime;
 	// Determine its next CPU burst length and put it into the readyQueue
 	eventProc->nextCPUBurstLength = CPUBurstRandom(eventProc->averageCPUBurstLength);
 	eventProc->status = Process::WAITING;

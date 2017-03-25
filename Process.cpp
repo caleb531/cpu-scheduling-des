@@ -14,6 +14,7 @@ Process::Process(int procId, int arrivalTime) {
 	srand(time(NULL));
 	this->totalCPUDuration = rand() % 59000 + 1000;
 	this->averageCPUBurstLength = rand() % 96 + 5;
+	this->totalIODuration = 0;
 
 	this->remainingCPUDuration = totalCPUDuration;
 }
