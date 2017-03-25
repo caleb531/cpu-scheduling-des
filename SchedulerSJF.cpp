@@ -29,6 +29,7 @@ void SchedulerSJF::schedule(int currentTime) {
 		Process *runningProc = readyQueue.top();
 		readyQueue.pop();
 		runningProc->status = Process::RUNNING;
+		isCPUIdle = false;
 
 		Event *newEvent = new Event(Event::CPU_COMPLETION, currentTime + runningProc->nextCPUBurstLength, runningProc->procId);
 		eventQueue->push(newEvent);
