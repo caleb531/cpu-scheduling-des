@@ -31,6 +31,6 @@ class EventComparator {
 
 	public:
 
-		bool operator ()(Event* a, Event* b);
+		bool operator ()(Event *a, Event *b);
 
 };

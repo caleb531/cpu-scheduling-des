@@ -58,6 +58,6 @@ class ProcessComparator {
 
 	public:
 
-		bool operator ()(Process* a, Process* b);
+		bool operator ()(Process *a, Process *b);
 
 };

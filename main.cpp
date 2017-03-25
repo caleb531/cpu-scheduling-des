@@ -51,7 +51,7 @@ SchedulerPointer* promptForScheduler(EventPriorityQueue *eventQueue) {
 // Deallocate event queue, including any events still in the queue
 void deallocateEventQueue(EventPriorityQueue *eventQueue) {
 	while (!eventQueue->empty()) {
-		Event* topEvent = eventQueue->top();
+		Event *topEvent = eventQueue->top();
 		eventQueue->pop();
 		delete topEvent;
 	}
@@ -72,15 +72,15 @@ int main() {
 
 	//Filling the event queue for testing purposes
 	for (int i = 0; i < loadLevel; i++) {
-		Event* arrivalEvent = new Event(Event::PROCESS_ARRIVAL, 0, i);
+		Event *arrivalEvent = new Event(Event::PROCESS_ARRIVAL, 0, i);
 		eventQueue->push(arrivalEvent);
 	}
 
-	SchedulerPointer* scheduler = promptForScheduler(eventQueue);
+	SchedulerPointer *scheduler = promptForScheduler(eventQueue);
 
 	//Main while loop
 	while (!eventQueue->empty() && currentTime < quitTime) {
-		Event* nextEvent = eventQueue->top();
+		Event *nextEvent = eventQueue->top();
 		eventQueue->pop();
 
 		currentTime = nextEvent->eventTime;
