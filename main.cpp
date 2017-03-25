@@ -48,6 +48,16 @@ SchedulerPointer* promptForScheduler(EventPriorityQueue *eventQueue) {
 	}
 }
 
+// Deallocate event queue, including any events still in the queue
+void deallocateEventQueue(EventPriorityQueue *eventQueue) {
+	while (!eventQueue->empty()) {
+		Event* topEvent = eventQueue->top();
+		eventQueue->pop();
+		delete topEvent;
+	}
+	delete eventQueue;
+}
+
 int main() {
 
 	printProgramHeader();
@@ -75,6 +85,9 @@ int main() {
 
 		currentTime = nextEvent->eventTime;
 		scheduler->handleEvent(nextEvent);
+		delete nextEvent;
 	}
+	deallocateEventQueue(eventQueue);
+	delete scheduler;
 	return 0;
 }

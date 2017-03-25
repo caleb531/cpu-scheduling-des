@@ -15,6 +15,15 @@ SchedulerFCFS::SchedulerFCFS(EventPriorityQueue *eventQueue) : Scheduler<Process
 	// Do nothing; the initializer list takes care of everything
 }
 
+SchedulerFCFS::~SchedulerFCFS() {
+	// Deallocate queue of ready processes
+	while (!readyQueue.empty()) {
+		Process *topProc = readyQueue.front();
+		readyQueue.pop();
+		delete topProc;
+	}
+}
+
 void SchedulerFCFS::schedule(int currentTime) {
 	if (isCPUIdle && !readyQueue.empty()) {
 		// If the CPU is idle, grab the next process from readyQueue and set it to run

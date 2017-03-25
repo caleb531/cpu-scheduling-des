@@ -21,6 +21,17 @@ Scheduler<ReadyQueue>::Scheduler(EventPriorityQueue *eventQueue) {
 }
 
 template <typename ReadyQueue>
+Scheduler<ReadyQueue>::~Scheduler() {
+	// Deallocate all remaining processes in process table
+	for (int i = 0; i < procTable.size(); i++) {
+		delete procTable[i];
+	}
+	// Delete references to deallocated memory
+	procTable.clear();
+	eventQueue = NULL;
+}
+
+template <typename ReadyQueue>
 Process* Scheduler<ReadyQueue>::findProcess(int procID) {
 	for (int i = 0; i < procTable.size(); i++) {
 		if (procTable[i]->procId == procID) {

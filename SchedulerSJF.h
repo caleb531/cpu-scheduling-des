@@ -11,6 +11,7 @@ class SchedulerSJF : public Scheduler<ProcessPriorityQueue> {
 	public:
 
 		SchedulerSJF(EventPriorityQueue *eventQueue);
+		virtual ~SchedulerSJF();
 		void schedule(int currentTime);
 
 };

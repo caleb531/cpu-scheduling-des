@@ -11,6 +11,7 @@ class SchedulerFCFS : public Scheduler<ProcessQueue> {
 	public:
 
 		SchedulerFCFS(EventPriorityQueue *eventQueue);
+		virtual ~SchedulerFCFS();
 		void schedule(int currentTime);
 
 };

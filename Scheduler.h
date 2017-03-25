@@ -36,6 +36,7 @@ class Scheduler : public SchedulerPointer {
 	public:
 
 		Scheduler(EventPriorityQueue *eventQueue);
+		virtual ~Scheduler();
 
 		// Handle various kinds of process events
 		void handleProcArrival(Event *event);

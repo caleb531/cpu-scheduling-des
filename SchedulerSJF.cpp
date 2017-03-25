@@ -13,6 +13,15 @@ SchedulerSJF::SchedulerSJF(EventPriorityQueue *eventQueue) : Scheduler<ProcessPr
 	// Do nothing; the initializer list takes care of everything
 }
 
+SchedulerSJF::~SchedulerSJF() {
+	// Deallocate priority queue of ready processes
+	while (!readyQueue.empty()) {
+		Process *topProc = readyQueue.top();
+		readyQueue.pop();
+		delete topProc;
+	}
+}
+
 void SchedulerSJF::schedule(int currentTime) {
 	if (isCPUIdle && !readyQueue.empty()) {
 		// If the CPU is idle, grab the next process from readyQueue and set it
