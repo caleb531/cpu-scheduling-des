@@ -1,5 +1,5 @@
 /**
- * Scheduler abstract base class definition
+ * Generic (template-less) scheduler base class definition
  */
 #pragma once
 #include "Event.h"
