@@ -8,7 +8,7 @@ class Process {
 
 	public:
 
-		Process(int procId, int startTime);
+		Process(int procId, int arrivalTime);
 
 		// A unique identifier for each process
 		int procId;
@@ -16,7 +16,7 @@ class Process {
 		// All time values are in milliseconds
 
 		// Time when the process starts in the simulation
-		int startTime;
+		int arrivalTime;
 
 		// Total amount of time spent in CPU burst.
 		// Determined randomly at creation between 1 and 60 seconds

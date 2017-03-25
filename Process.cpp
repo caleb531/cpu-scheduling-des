@@ -7,9 +7,9 @@
 #include "Process.h"
 using namespace std;
 
-Process::Process(int procId, int startTime) {
+Process::Process(int procId, int arrivalTime) {
 	this->procId = procId;
-	this->startTime = startTime;
+	this->arrivalTime = arrivalTime;
 
 	srand(time(NULL));
 	this->totalCPUDuration = rand() % 59000 + 1000;
