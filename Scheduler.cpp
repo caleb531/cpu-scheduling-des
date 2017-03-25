@@ -63,15 +63,15 @@ void Scheduler<ReadyQueue>::handleCPUCompletion(Event *event) {
 	// Find the process that the event is talking about
 	Process *eventProc = findProcess(event->procId);
 
-	// If the process is done with its CPU bursts, terminate it
 	if (eventProc->remainingCPUDuration == 0) {
+		// If the process is completely finished with its work, terminate it
 		eventProc->status = Process::TERMINATED;
-	}
-	else {
-		// Else determine a random IO burst time and create an io completion event
+	} else {
+		// Ensure that the process knows how much more it needs to do
+		eventProc->remainingCPUDuration -= eventProc->nextCPUBurstLength;
+		// Prepare an I/O completion event to run next
 		srand(time(NULL));
 		eventProc->IOBurstTime = rand() % 71 + 30;
-
 		Event *newEvent = new Event(Event::IO_COMPLETION, event->eventTime + eventProc->IOBurstTime, eventProc->procId);
 		eventQueue->push(newEvent);
 	}
