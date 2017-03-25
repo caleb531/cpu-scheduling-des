@@ -70,8 +70,7 @@ void Scheduler<ReadyQueue>::handleCPUCompletion(Event *event) {
 	else {
 		// Else determine a random IO burst time and create an io completion event
 		srand(time(NULL));
-		int ioTime = rand() % 71 + 30;
-		eventProc->IOBurstTime = ioTime;
+		eventProc->IOBurstTime = rand() % 71 + 30;
 
 		Event *newEvent = new Event(Event::IO_COMPLETION, event->eventTime + eventProc->IOBurstTime, eventProc->procId);
 		eventQueue->push(newEvent);
