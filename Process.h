@@ -18,6 +18,9 @@ class Process {
 		// Time when the process starts in the simulation
 		int arrivalTime;
 
+		// The time the process finishes all of its work
+		int finishTime;
+
 		// Total amount of time spent in CPU burst.
 		// Determined randomly at creation between 1 and 60 seconds
 		int totalCPUDuration;

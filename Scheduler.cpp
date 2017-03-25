@@ -66,6 +66,7 @@ void Scheduler<ReadyQueue>::handleCPUCompletion(Event *cpuEvent) {
 	if (eventProc->remainingCPUDuration == 0) {
 		// If the process is completely finished with its work, terminate it
 		eventProc->status = Process::TERMINATED;
+		eventProc->finishTime = cpuEvent->eventTime;
 	} else {
 		// Ensure that the process knows how much more it needs to do
 		eventProc->remainingCPUDuration -= eventProc->nextCPUBurstLength;
