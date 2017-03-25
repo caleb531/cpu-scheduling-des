@@ -1,6 +1,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <queue>
+#include "random.h"
 #include "Event.h"
 #include "SchedulerPointer.h"
 #include "SchedulerFCFS.h"
@@ -65,14 +66,14 @@ int main() {
 	const int quitTime = 300000;
 	int currentTime = 0;
 
-	EventPriorityQueue *eventQueue = new EventPriorityQueue();
-
 	// The total number of processes to run in the simulation
 	int loadLevel = promptForLoadLevel();
 
-	//Filling the event queue for testing purposes
+	// Initialize the event queue with process arrivals at random times
+	EventPriorityQueue *eventQueue = new EventPriorityQueue();
+	srand(time(NULL));
 	for (int i = 0; i < loadLevel; i++) {
-		Event *arrivalEvent = new Event(Event::PROCESS_ARRIVAL, 0, i);
+		Event *arrivalEvent = new Event(Event::PROCESS_ARRIVAL, rand() % 300000, i);
 		eventQueue->push(arrivalEvent);
 	}
 
