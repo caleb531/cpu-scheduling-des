@@ -14,5 +14,14 @@ SchedulerSJF::SchedulerSJF(EventPriorityQueue *eventQueue) : Scheduler<ProcessPr
 }
 
 void SchedulerSJF::schedule(int currentTime) {
-	// TODO: implement SJF scheduling
+	if (isCPUIdle && !readyQueue.empty()) {
+		// If the CPU is idle, grab the next process from readyQueue and set it
+		// to run
+		Process *runningProc = readyQueue.top();
+		readyQueue.pop();
+		runningProc->status = Process::RUNNING;
+
+		Event *newEvent = new Event(Event::CPU_COMPLETION, currentTime + runningProc->nextCPUBurstLength, runningProc->procId);
+		eventQueue->push(newEvent);
+	}
 }
