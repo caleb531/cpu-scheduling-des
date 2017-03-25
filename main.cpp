@@ -2,7 +2,7 @@
 #include <iostream>
 #include <queue>
 #include "Event.h"
-#include "GenericScheduler.h"
+#include "SchedulerPointer.h"
 #include "SchedulerFCFS.h"
 #include "SchedulerSJF.h"
 using namespace std;
@@ -28,7 +28,7 @@ int promptForLoadLevel() {
 }
 
 // Prompt the user for a scheduling algorithm under which to run the simulation
-GenericScheduler* promptForScheduler(EventPriorityQueue *eventQueue) {
+SchedulerPointer* promptForScheduler(EventPriorityQueue *eventQueue) {
 	cout << "Available schedulers:" << endl;
 	cout << "  1. First-Come-First-Serve (FCFS)" << endl;
 	cout << "  2. Shortest-Job-First (SJF)" << endl;
@@ -66,7 +66,7 @@ int main() {
 		eventQueue->push(arrivalEvent);
 	}
 
-	GenericScheduler* scheduler = promptForScheduler(eventQueue);
+	SchedulerPointer* scheduler = promptForScheduler(eventQueue);
 
 	//Main while loop
 	while (!eventQueue->empty() && currentTime < quitTime) {
