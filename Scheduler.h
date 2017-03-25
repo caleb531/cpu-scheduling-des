@@ -39,9 +39,9 @@ class Scheduler : public SchedulerPointer {
 		virtual ~Scheduler();
 
 		// Handle various kinds of process events
-		void handleProcArrival(Event *event);
-		void handleCPUCompletion(Event *event);
-		void handleIOCompletion(Event *event);
+		void handleProcArrival(Event *arrivalEvent);
+		void handleCPUCompletion(Event *cpuEvent);
+		void handleIOCompletion(Event *ioEvent);
 		void handleEvent(Event *event);
 
 		// The core scheduling algorithm that determines which processes get
