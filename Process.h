@@ -62,7 +62,7 @@ class Process {
 		int getServiceTime();
 		int getIOTime();
 		int getTurnaroundTime();
-		int getWaitingTime(int totalSchedulerTime);
+		int getWaitingTime();
 
 };
 

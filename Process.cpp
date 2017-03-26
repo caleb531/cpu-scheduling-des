@@ -46,6 +46,6 @@ int Process::getTurnaroundTime() {
 	return finishTime - arrivalTime;
 }
 
-int Process::getWaitingTime(int totalSchedulerTime) {
-	return totalSchedulerTime - getServiceTime();
+int Process::getWaitingTime() {
+	return getTurnaroundTime() - getServiceTime() - totalIODuration;
 }

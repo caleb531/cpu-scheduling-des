@@ -66,7 +66,7 @@ void Scheduler<ReadyQueue>::handleCPUCompletion(Event *cpuEvent) {
 	// Find the process that the event is talking about
 	Process *eventProc = findProcess(cpuEvent->procId);
 
-	if (eventProc->remainingCPUDuration == 0) {
+	if (eventProc->remainingCPUDuration <= 0) {
 		// If the process is completely finished with its work, terminate it
 		eventProc->status = Process::TERMINATED;
 		eventProc->finishTime = cpuEvent->eventTime;
@@ -148,7 +148,7 @@ void Scheduler<ReadyQueue>::printStats() {
 		printSubStat("Turnaround", turnaroundTime);
 		turnaroundTimeSum += turnaroundTime;
 
-		int waitingTime = procTable[i]->getWaitingTime(totalSchedulerTime);
+		int waitingTime = procTable[i]->getWaitingTime();
 		printSubStat("Waiting", waitingTime);
 		waitingTimeSum += waitingTime;
 
