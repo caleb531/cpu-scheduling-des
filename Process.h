@@ -55,6 +55,15 @@ class Process {
 		};
 		Status status;
 
+		// Functions for computing process metrics
+
+		int getArrivalTime();
+		int getFinishTime();
+		int getServiceTime();
+		int getIOTime();
+		int getTurnaroundTime();
+		int getWaitingTime(int totalSchedulerTime);
+
 };
 
 

@@ -3,6 +3,7 @@
  */
 #pragma once
 #include "Event.h"
+#include "Process.h"
 using namespace std;
 
 // A parent class for Schedulers that does not use templates; this class is
@@ -14,5 +15,8 @@ class SchedulerPointer {
 
 		// Handle any kind of process event
 		virtual void handleEvent(Event *event) = 0;
+
+		// Print the process and scheduler statistics
+		virtual void printStats() = 0;
 
 };

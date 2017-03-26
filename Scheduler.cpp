@@ -5,6 +5,8 @@
 #include <cstdlib>
 #include <ctime>
 #include <queue>
+#include <iostream>
+#include <string>
 #include "Process.h"
 #include "Event.h"
 #include "Scheduler.h"
@@ -18,6 +20,7 @@ template <typename ReadyQueue>
 Scheduler<ReadyQueue>::Scheduler(EventPriorityQueue *eventQueue) {
 	this->eventQueue = eventQueue;
 	this->isCPUIdle = true;
+	this->totalSchedulerTime = 0;
 }
 
 template <typename ReadyQueue>
@@ -97,6 +100,8 @@ void Scheduler<ReadyQueue>::handleIOCompletion(Event *ioEvent) {
 
 template <typename ReadyQueue>
 void Scheduler<ReadyQueue>::handleEvent(Event *event) {
+	// Assume the scheduler run ends when the very last event has been emitted
+	totalSchedulerTime = event->eventTime;
 	switch (event->eventType) {
 		case Event::PROCESS_ARRIVAL:
 			handleProcArrival(event);
@@ -108,4 +113,50 @@ void Scheduler<ReadyQueue>::handleEvent(Event *event) {
 			handleIOCompletion(event);
 			break;
 	}
+}
+
+template <typename ReadyQueue>
+void Scheduler<ReadyQueue>::printTimeStat(string statLabel, int statTime) {
+	cout << statLabel << ": " << ((float)statTime / MS_TO_S) << "s" << endl;
+}
+
+template <typename ReadyQueue>
+void Scheduler<ReadyQueue>::printSubStat(string statLabel, int statTime) {
+	cout << "    ";
+	printTimeStat(statLabel, statTime);
+}
+
+template <typename ReadyQueue>
+void Scheduler<ReadyQueue>::printStats() {
+	// Keep running sums of various metrics for computing the averages later
+	int turnaroundTimeSum = 0;
+	int waitingTimeSum = 0;
+	int serviceTimeSum = 0;
+	for (int i = 0; i < procTable.size(); i++) {
+		cout << "Process " << procTable[i]->procId << ":" << endl;
+
+		printSubStat("Arrival", procTable[i]->getArrivalTime());
+		printSubStat("Finish", procTable[i]->getFinishTime());
+
+		int serviceTime = procTable[i]->getServiceTime();
+		printSubStat("Service", serviceTime);
+		serviceTimeSum += serviceTime;
+
+		printSubStat("I/O", procTable[i]->getIOTime());
+
+		int turnaroundTime = procTable[i]->getTurnaroundTime();
+		printSubStat("Turnaround", turnaroundTime);
+		turnaroundTimeSum += turnaroundTime;
+
+		int waitingTime = procTable[i]->getWaitingTime(totalSchedulerTime);
+		printSubStat("Waiting", waitingTime);
+		waitingTimeSum += waitingTime;
+
+	}
+	cout << "CPU Utilization: " <<
+		(100 * serviceTimeSum / totalSchedulerTime) << '%' << endl;
+	printTimeStat("Avg Turnaround Time",
+		(float)turnaroundTimeSum / (float)procTable.size());
+	printTimeStat("Avg Waiting Time",
+		(float)waitingTimeSum / (float)procTable.size());
 }

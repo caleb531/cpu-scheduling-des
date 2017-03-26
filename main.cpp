@@ -88,6 +88,7 @@ int main() {
 		scheduler->handleEvent(nextEvent);
 		delete nextEvent;
 	}
+	scheduler->printStats();
 	deallocateEventQueue(eventQueue);
 	delete scheduler;
 	return 0;

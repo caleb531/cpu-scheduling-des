@@ -4,6 +4,7 @@
 #pragma once
 #include <deque>
 #include <queue>
+#include <string>
 #include "Process.h"
 #include "Event.h"
 #include "SchedulerPointer.h"
@@ -21,6 +22,9 @@ class Scheduler : public SchedulerPointer {
 
 	protected:
 
+		// Conversion factor for milliseconds to seconds
+		const float MS_TO_S = 1000.0;
+
 		// The list of all processes in the system
 		vector<Process*> procTable;
 		// A reference to the process event queue; this is supplied when the
@@ -32,6 +36,9 @@ class Scheduler : public SchedulerPointer {
 
 		// Flag to note whether the CPU is being used or not
 		bool isCPUIdle;
+
+		// The total time the scheduler is running
+		int totalSchedulerTime;
 
 	public:
 
@@ -51,5 +58,12 @@ class Scheduler : public SchedulerPointer {
 		// Returns a pointer to the process in the procTable as determined by its ID
 		//Returns NULL if not found in table
 		Process* findProcess(int procID);
+
+		// Print any particular time metric (e.g. process turnaround time)
+		void printTimeStat(string statLabel, int statTime);
+		void printSubStat(string statLabel, int statTime);
+
+		// Print the process and scheduler statistics
+		void printStats();
 
 };
