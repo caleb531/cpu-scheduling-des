@@ -15,7 +15,7 @@ class Process {
 
 		// All time values are in milliseconds
 
-		// Time when the process starts in the simulation
+		// Time when the process enters the system
 		int arrivalTime;
 
 		// The time the process finishes all of its work
