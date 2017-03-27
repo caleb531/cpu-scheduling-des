@@ -63,7 +63,6 @@ int main() {
 
 	printProgramHeader();
 
-	const int quitTime = 300000;
 	int currentTime = 0;
 
 	// The total number of processes to run in the simulation
@@ -80,7 +79,7 @@ int main() {
 	SchedulerPointer *scheduler = promptForScheduler(eventQueue);
 
 	//Main while loop
-	while (!eventQueue->empty() && currentTime < quitTime) {
+	while (!eventQueue->empty()) {
 		Event *nextEvent = eventQueue->top();
 		eventQueue->pop();
 
