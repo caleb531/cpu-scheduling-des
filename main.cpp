@@ -1,3 +1,15 @@
+/**
+ * CS 433 Programming Assignment 3: CPU Scheduling
+ * Caleb Evans, Jonathan Tapia
+ * April 3, 2017
+ * @description
+ * This program includes several implementations of CPU scheduling algorithms,
+ * as well as a Discrete Event Simulation (DES) which utilizes these algorithms.
+ * @howToRun
+ * Run `make` to compile the program, then run `./des.out` to execute the
+ * compiled program. At startup, the program will prompt you for a load level
+ * and scheduling algorithm under which to run the simulation.
+ */
 #include <cstdlib>
 #include <iostream>
 #include <queue>
