@@ -15,15 +15,15 @@ typedef queue<Process*> ProcessQueue;
 typedef priority_queue<Process*, deque<Process*>, ProcessComparator> ProcessPriorityQueue;
 typedef priority_queue<Event*, deque<Event*>, EventComparator> EventPriorityQueue;
 
-// Conversion factor for milliseconds to seconds
-static const float MS_TO_S = 1000.0;
-
 // The Scheduler class should not be instantiated itself; it should instead be
 // subclassed, with the following virtual methods implemented
 template <typename ReadyQueue>
 class Scheduler : public SchedulerPointer {
 
 	protected:
+
+		// Conversion factor for milliseconds to seconds
+		static const float MS_TO_S;
 
 		// The list of all processes in the system
 		vector<Process*> procTable;

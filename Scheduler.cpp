@@ -17,6 +17,9 @@ template class Scheduler<ProcessQueue>;
 template class Scheduler<ProcessPriorityQueue>;
 
 template <typename ReadyQueue>
+const float Scheduler<ReadyQueue>::MS_TO_S = 1000.0;
+
+template <typename ReadyQueue>
 Scheduler<ReadyQueue>::Scheduler(EventPriorityQueue *eventQueue) {
 	this->eventQueue = eventQueue;
 	this->isCPUIdle = true;
