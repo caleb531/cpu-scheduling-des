@@ -155,7 +155,7 @@ void Scheduler<ReadyQueue>::printStats() {
 	}
 	cout << "CPU Utilization: " <<
 		(100 * serviceTimeSum / totalSchedulerTime) << '%' << endl;
-	cout << "Throughput : " <<
+	cout << "Throughput: " <<
 		((float)procTable.size() / ((float)totalSchedulerTime / MS_TO_S)) << " jobs / s" << endl;
 	printTimeStat("Avg Turnaround Time",
 		(float)turnaroundTimeSum / (float)procTable.size());
