@@ -1,7 +1,6 @@
 /**
  * Shortest-Job-First (SJF) scheduler implementation
  */
-#include <queue>
 #include "Process.h"
 #include "Event.h"
 #include "Scheduler.h"

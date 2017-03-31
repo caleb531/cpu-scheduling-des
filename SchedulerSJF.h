@@ -2,7 +2,6 @@
  * Shortest-Job-First (SJF) scheduler definition
  */
 #pragma once
-#include <queue>
 #include "Scheduler.h"
 using namespace std;
 

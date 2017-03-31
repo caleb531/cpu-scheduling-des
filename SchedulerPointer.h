@@ -3,7 +3,6 @@
  */
 #pragma once
 #include "Event.h"
-#include "Process.h"
 using namespace std;
 
 // A parent class for Schedulers that does not use templates; this class is

@@ -1,9 +1,6 @@
 /**
  * First-Come-First-Serve (FCFS) scheduler implementation
  */
-#include <queue>
-#include <cstdlib>
-#include <iostream>
 #include "Process.h"
 #include "Event.h"
 #include "Scheduler.h"

@@ -12,8 +12,6 @@
  */
 #include <cstdlib>
 #include <iostream>
-#include <queue>
-#include "random.h"
 #include "Event.h"
 #include "SchedulerPointer.h"
 #include "SchedulerFCFS.h"
