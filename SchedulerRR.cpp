@@ -8,8 +8,9 @@
 using namespace std;
 
 
-SchedulerRR::SchedulerRR(EventPriorityQueue *eventQueue) : Scheduler<ProcessQueue>(eventQueue) {
-	// Do nothing; the initializer list takes care of everything
+SchedulerRR::SchedulerRR(EventPriorityQueue *eventQueue, int timeSliceAmount) : Scheduler<ProcessQueue>(eventQueue) {
+	// The initializer list takes care of most things
+    this->timeSlice = timeSliceAmount;
 }
 
 SchedulerRR::~SchedulerRR() {
@@ -22,7 +23,20 @@ SchedulerRR::~SchedulerRR() {
 }
 
 void SchedulerRR::handleTimerExpiration(Event *exEvent) {
+    // If the process is not currently running, don't need to handle it
+    if (runningProcess->procId != exEvent->procId){
+        return;
+    }
 
+    // Ensure that the process knows how much more it needs to do, and set it to wait
+    runningProcess->nextCPUBurstLength -= (exEvent->eventTime - runningProcess->burstStartTime);   
+    runningProcess->status = Process::WAITING;
+
+    // Then, add it to the end of the readyQueue
+    readyQueue.push(runningProcess);
+
+    isCPUIdle = true;
+    schedule(exEvent->eventTime);
 }
 
 void SchedulerRR::handleEvent(Event *event) {
@@ -45,5 +59,23 @@ void SchedulerRR::handleEvent(Event *event) {
 }
 
 void SchedulerRR::schedule(int currentTime) {
-	//TODO: Implement
+	if (isCPUIdle && !readyQueue.empty()) {
+		// If the CPU is idle, grab the next process from readyQueue and set it to run
+		Process *runningProc = readyQueue.front();
+		readyQueue.pop();
+		runningProc->status = Process::RUNNING;
+		runningProc->burstStartTime = currentTime;
+		runningProcess = runningProc;
+		isCPUIdle = false;
+
+        // If the process will time out before completing its CPU burst, don't create a CPU completion event. Likewise vice-versa.
+        Event *newEvent;
+        if (timeSlice < runningProc->nextCPUBurstLength) {
+            newEvent = new Event(Event::TIMER_EXPIRATION, currentTime + timeSlice, runningProc->procId);
+        } else {
+            newEvent = new Event(Event::CPU_COMPLETION, currentTime + runningProc->nextCPUBurstLength, runningProc->procId);
+        }
+
+		eventQueue->push(newEvent);
+	}
 }
