@@ -8,7 +8,7 @@ using namespace std;
 class SchedulerRR : public Scheduler<ProcessQueue> {
 
 	private:
-		// Amount of time spent per process before switching
+		// Amount of time spent in milliseconds per process before switching
 		int timeSlice;
 
 	public:
