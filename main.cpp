@@ -16,6 +16,7 @@
 #include "SchedulerPointer.h"
 #include "SchedulerFCFS.h"
 #include "SchedulerSJF.h"
+#include "SchedulerPSJF.h"
 using namespace std;
 
 // Print the basic program information
@@ -43,6 +44,7 @@ SchedulerPointer* promptForScheduler(EventPriorityQueue *eventQueue) {
 	cout << "Available schedulers:" << endl;
 	cout << "  1. First-Come-First-Serve (FCFS)" << endl;
 	cout << "  2. Shortest-Job-First (SJF)" << endl;
+	cout << "  3. Preemptive-Shortest-Job-First (PSJF)" << endl;
 	cout << "Choose a scheduler's number: ";
 	int schedulerChoice;
 	cin >> schedulerChoice;
@@ -53,6 +55,9 @@ SchedulerPointer* promptForScheduler(EventPriorityQueue *eventQueue) {
 		case 2:
 			cout << "You chose SJF" << endl;
 			return new SchedulerSJF(eventQueue);
+		case 3:
+			cout << "You chose PSJF" << endl;
+			return new SchedulerPSJF(eventQueue);
 		default:
 			cout << "Invalid scheduler. Aborting." << endl;
 			exit(1);
