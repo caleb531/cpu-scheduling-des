@@ -29,7 +29,7 @@ void SchedulerRR::handleTimerExpiration(Event *exEvent) {
     }
 
     // Ensure that the process knows how much more it needs to do, and set it to wait
-    runningProcess->nextCPUBurstLength -= (exEvent->eventTime - runningProcess->burstStartTime);   
+    runningProcess->nextCPUBurstLength -= (exEvent->eventTime - runningProcess->burstStartTime);
     runningProcess->status = Process::WAITING;
 
     // Then, add it to the end of the readyQueue

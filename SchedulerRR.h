@@ -15,7 +15,7 @@ class SchedulerRR : public Scheduler<ProcessQueue> {
 
 		SchedulerRR(EventPriorityQueue *eventQueue, int timeSliceAmount);
 		virtual ~SchedulerRR();
-		
+
 		// Handle what to do when timer expires
 		void handleTimerExpiration(Event *exEvent);
 
