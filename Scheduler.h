@@ -34,6 +34,9 @@ class Scheduler : public SchedulerPointer {
 		// defines the particular type of queue
 		ReadyQueue readyQueue;
 
+		// Pointer to the process currently running in the CPU
+		Process *runningProcess;
+
 		// Flag to note whether the CPU is being used or not
 		bool isCPUIdle;
 

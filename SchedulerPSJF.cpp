@@ -4,7 +4,7 @@
 #include "Process.h"
 #include "Event.h"
 #include "Scheduler.h"
-#include "SchedulerSJF.h"
+#include "SchedulerPSJF.h"
 using namespace std;
 
 
@@ -28,6 +28,7 @@ void SchedulerSJF::schedule(int currentTime) {
 		Process *runningProc = readyQueue.top();
 		readyQueue.pop();
 		runningProc->status = Process::RUNNING;
+        runningProcess = runningProc;
 		isCPUIdle = false;
 
 		Event *newEvent = new Event(Event::CPU_COMPLETION, currentTime + runningProc->nextCPUBurstLength, runningProc->procId);
@@ -36,5 +37,7 @@ void SchedulerSJF::schedule(int currentTime) {
     else if (!readyQueue.empty()) {
         // Check if the next process is shorter than the currently running process,
         // then preempt that process
+        Process *nextProc = readyQueue.top();
+        //if (nextProc->remainingCPUDuration < )
     }
 }
