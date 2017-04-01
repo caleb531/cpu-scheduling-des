@@ -10,7 +10,7 @@ class Event {
 
 		// A set of supported event types; it's public so it can be used for the
 		// checking of event types in the client
-		enum EventType { PROCESS_ARRIVAL, CPU_COMPLETION, IO_COMPLETION };
+		enum EventType { PROCESS_ARRIVAL, CPU_COMPLETION, IO_COMPLETION, TIMER_EXPIRATION };
 		EventType eventType;
 
 		// The time when the event should take place; it is named 'eventTime'

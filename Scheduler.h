@@ -52,7 +52,7 @@ class Scheduler : public SchedulerPointer {
 		void handleProcArrival(Event *arrivalEvent);
 		void handleCPUCompletion(Event *cpuEvent);
 		void handleIOCompletion(Event *ioEvent);
-		void handleEvent(Event *event);
+		virtual void handleEvent(Event *event);
 
 		// The core scheduling algorithm that determines which processes get
 		// time on the CPU; this must be defined by each subclass

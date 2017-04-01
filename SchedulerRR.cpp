@@ -21,6 +21,29 @@ SchedulerRR::~SchedulerRR() {
 	}
 }
 
+void SchedulerRR::handleTimerExpiration(Event *exEvent) {
+
+}
+
+void SchedulerRR::handleEvent(Event *event) {
+	// Assume the scheduler run ends when the very last event has been emitted
+	totalSchedulerTime = event->eventTime;
+	switch (event->eventType) {
+		case Event::PROCESS_ARRIVAL:
+			handleProcArrival(event);
+			break;
+		case Event::CPU_COMPLETION:
+			handleCPUCompletion(event);
+			break;
+		case Event::IO_COMPLETION:
+			handleIOCompletion(event);
+			break;
+		case Event::TIMER_EXPIRATION:
+            handleTimerExpiration(event);
+            break;
+	}
+}
+
 void SchedulerRR::schedule(int currentTime) {
 	//TODO: Implement
 }
