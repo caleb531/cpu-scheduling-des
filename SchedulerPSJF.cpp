@@ -34,8 +34,7 @@ void SchedulerPSJF::schedule(int currentTime) {
 
 		Event *newEvent = new Event(Event::CPU_COMPLETION, currentTime + runningProc->nextCPUBurstLength, runningProc->procId);
 		eventQueue->push(newEvent);
-	}
-    else if (!readyQueue.empty()) {
+	} else if (!readyQueue.empty()) {
         // Check if the next process is shorter than the currently running process,
         // then preempt that process if so
         Process *nextProc = readyQueue.top();
