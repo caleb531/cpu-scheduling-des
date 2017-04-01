@@ -21,6 +21,9 @@ class Process {
 		// The time the process finishes all of its work
 		int finishTime;
 
+		// Time when the process started a CPU burst
+		int burstStartTime;
+
 		// Total amount of time spent in CPU burst.
 		// Determined randomly at creation between 1 and 60 seconds
 		int totalCPUDuration;

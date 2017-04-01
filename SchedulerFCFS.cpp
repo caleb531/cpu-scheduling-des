@@ -27,6 +27,7 @@ void SchedulerFCFS::schedule(int currentTime) {
 		Process *runningProc = readyQueue.front();
 		readyQueue.pop();
 		runningProc->status = Process::RUNNING;
+		runningProc->burstStartTime = currentTime;
 		runningProcess = runningProc;
 		isCPUIdle = false;
 

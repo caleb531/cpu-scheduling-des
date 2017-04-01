@@ -1,5 +1,5 @@
 /**
- * Priority Shortest-Job-First (PSJF) scheduler definition
+ * Preemptive Shortest-Job-First (PSJF) scheduler definition
  */
 #pragma once
 #include "Scheduler.h"

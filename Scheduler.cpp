@@ -69,6 +69,11 @@ void Scheduler<ReadyQueue>::handleCPUCompletion(Event *cpuEvent) {
 	// Find the process that the event is talking about
 	Process *eventProc = findProcess(cpuEvent->procId);
 
+	// If the event has not currently running, it has been preempted or timed out.
+	if (eventProc != runningProcess) {
+		return;
+	}
+
 	if (eventProc->remainingCPUDuration <= 0) {
 		// If the process is completely finished with its work, terminate it
 		eventProc->status = Process::TERMINATED;
